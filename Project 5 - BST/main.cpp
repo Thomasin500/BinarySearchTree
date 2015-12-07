@@ -53,7 +53,7 @@ int main() {
 	cout << "\n\nMaximum is : ";
 	bst.getMaximum();
 
-	cout << "\nMaximum is : ";
+	cout << "\nMinimum is : ";
 	bst.getMinimum();
 	
 	cout << "\n\n\n\nTree 2: String\n";

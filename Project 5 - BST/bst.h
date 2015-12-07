@@ -20,6 +20,12 @@ private:
 		Node * parent;
 
 		Node() :left(NULL), right(NULL), parent(NULL) {};
+		/*-----------------------------------------------------------------------
+		Constructor for Node Class
+
+		Precondition:  none
+		Postcondition: Node Object is created
+		-----------------------------------------------------------------------*/
 
 		Node(const T& item) {
 
@@ -28,12 +34,24 @@ private:
 			right = NULL;
 			parent = NULL;
 		};
+		/*-----------------------------------------------------------------------
+		Specific Constructor for Node Class
+
+		Precondition:  any class item
+		Postcondition: Node Object is created with its data set to the item
+		-----------------------------------------------------------------------*/
 
 		~Node() {
 		
 			delete left;
 			delete right;		
 		}
+		/*-----------------------------------------------------------------------
+		Destructor for Node Class
+
+		Precondition:  Node Object
+		Postcondition: Node Object is deleted along with its child pointers
+		-----------------------------------------------------------------------*/
 
 		T getMinFromNode() {
 
@@ -41,6 +59,12 @@ private:
 
 			else return left->getMaxFromNode();
 		}
+		/*-----------------------------------------------------------------------
+		getMinFromNode
+
+		Precondition:  none
+		Postcondition: Returns the data member of the smallest node below this node
+		-----------------------------------------------------------------------*/
 
 		T getMaxFromNode() {
 
@@ -48,6 +72,12 @@ private:
 
 			else return right->getMaxFromNode();
 		}
+		/*-----------------------------------------------------------------------
+		getMaxFromNode
+
+		Precondition:  none
+		Postcondition: Returns the data member of the largest node below this node
+		-----------------------------------------------------------------------*/
 
 		bool insertUtil(const T & data) {
 
@@ -77,6 +107,12 @@ private:
 			
 			return false;
 		}
+		/*-----------------------------------------------------------------------
+		insertUtil
+
+		Precondition:  data item of node to be inserted
+		Postcondition: a helper function for the insert function
+		-----------------------------------------------------------------------*/
 
 		Node * removeUtil(Node * node, T data) {
 
@@ -133,14 +169,20 @@ private:
 					return this;
 				}
 			}
-		}		
+		}	
+		/*-----------------------------------------------------------------------
+		removeUtil
+
+		Precondition:  data item of node to be removed
+		Postcondition: a helper function for the remove function
+		-----------------------------------------------------------------------*/
 	};
 
 public:
 
-	Node * _root;
+	Node * _root; //pointer to root node of tree
 
-	BinarySearchTree() {}
+	BinarySearchTree() {} //basic constructor of class
 
 	BinarySearchTree(BinarySearchTree & toCopy) {
 
@@ -148,6 +190,12 @@ public:
 	
 		copyBinarySearchTree(toCopy._root, _root);
 	}
+	/*-----------------------------------------------------------------------
+	copy constructor 
+
+	Precondition:  instaniated BST object
+	Postcondition: this object is created and now contains the same data as the referenced node
+	-----------------------------------------------------------------------*/
 
 	~BinarySearchTree() {
 
@@ -156,6 +204,12 @@ public:
 			deleteBinarySearchTree(_root);
 		}
 	}
+	/*-----------------------------------------------------------------------
+	destructor
+
+	Precondition:  BST objet
+	Postcondition: calls the deleteBST function which deletes all nodes within the tree and then the root itself
+	-----------------------------------------------------------------------*/
 
 	bool isEmpty() const {
 	
@@ -166,6 +220,12 @@ public:
 
 		else return false;	
 	}
+	/*-----------------------------------------------------------------------
+	isEmpty
+
+	Precondition:  none
+	Postcondition: returns if the tree is empty or not
+	-----------------------------------------------------------------------*/
 
 	bool search(const T & data) const {
 	
@@ -191,6 +251,12 @@ public:
 
 		return false;
 	}
+	/*-----------------------------------------------------------------------
+	search
+
+	Precondition:  data item of node to be searched for
+	Postcondition: returns true if the data item exists within a node within the tree
+	-----------------------------------------------------------------------*/
 
 	T getMinimum() const {
 
@@ -207,6 +273,12 @@ public:
 			cout << "The minimum value in the tree is: " << minNode.data << endl;
 		}
 	}
+	/*-----------------------------------------------------------------------
+	getMinimum
+
+	Precondition:  none
+	Postcondition: returns the smallest node in the tree
+	-----------------------------------------------------------------------*/
 
 	T getMaximum() const {
 	
@@ -224,6 +296,12 @@ public:
 
 		}
 	}
+	/*-----------------------------------------------------------------------
+	getMaximum
+
+	Precondition:  none
+	Postcondition: returns the largest node in the tree
+	-----------------------------------------------------------------------*/
 
 	int getHeight(Node * tree) const {
 		
@@ -236,6 +314,12 @@ public:
 
 		else return rightDepth + 1;
 	}
+	/*-----------------------------------------------------------------------
+	getHeight
+
+	Precondition:  a pointer to a node within the tree
+	Postcondition: returns the number of layers in the tree
+	-----------------------------------------------------------------------*/
 
 	int getSize(Node * node) const {
 	
@@ -246,6 +330,12 @@ public:
 			return (getSize(node->left) + getSize(node->right) + 1);
 		}
 	}
+	/*-----------------------------------------------------------------------
+	getSize
+
+	Precondition:  pointer to a node
+	Postcondition: returns the number of nodes in the tree
+	-----------------------------------------------------------------------*/
 
 	void inorder(std::ostream & out) const {
 	
@@ -259,6 +349,12 @@ public:
 
 		out << endl;
 	}
+	/*-----------------------------------------------------------------------
+	inorder
+
+	Precondition:  out stream to be outputted to
+	Postcondition: outputs the tree in order traverse
+	-----------------------------------------------------------------------*/
 
 	void postorder(std::ostream & out) const {
 	
@@ -272,6 +368,12 @@ public:
 
 		out << endl;
 	}
+	/*-----------------------------------------------------------------------
+	postorder
+
+	Precondition:  out stream to be outputted to
+	Postcondition: outputs the tree post order traverse
+	-----------------------------------------------------------------------*/
 
 	void preorder(std::ostream & out) const {
 	
@@ -285,6 +387,12 @@ public:
 
 		out << endl;
 	}
+	/*-----------------------------------------------------------------------
+	preorder
+
+	Precondition:  out stream to be outputted to
+	Postcondition: outputs the tree pre order traverse
+	-----------------------------------------------------------------------*/
 
 	bool insert(const T & data) {
 
@@ -298,6 +406,12 @@ public:
 
 		else _root->insertUtil(data);
 	}
+	/*-----------------------------------------------------------------------
+	insert
+
+	Precondition:  data item to be inserted
+	Postcondition: calls the helper function insertUtil of the node class, node with data item is now inserted
+	-----------------------------------------------------------------------*/
 
 	bool remove(const T &data) {
 	
@@ -335,6 +449,12 @@ public:
 			}		
 		}	
 	}
+	/*-----------------------------------------------------------------------
+	remove
+
+	Precondition:  data item of node to be removed
+	Postcondition: the reference node is now deleted
+	-----------------------------------------------------------------------*/
 
 	void displayGraphic(std::ostream& out, Node * node, int level) const {
 	
@@ -364,6 +484,12 @@ public:
 			}			
 		}	
 	}
+	/*-----------------------------------------------------------------------
+	displayGraphic
+
+	Precondition:  out stream to be outputted to
+	Postcondition: displays the tree graphaically horizontially
+	-----------------------------------------------------------------------*/
 
 	BinarySearchTree& operator=(const BinarySearchTree& rhs) {
 	
@@ -373,6 +499,13 @@ public:
 
 		return *this;	
 	}
+	/*-----------------------------------------------------------------------
+	operator '='
+
+	Precondition:  the BST object RHS
+	Postcondition: copies the RHS of the arguement to the LHS object
+	-----------------------------------------------------------------------*/
+
 
 private: 
 
@@ -394,6 +527,12 @@ private:
 			copyBinarySearchTree(original->right, copy->right);
 		}
 	}
+	/*-----------------------------------------------------------------------
+	copyBinarySearchTree
+
+	Precondition:  the original and tocopy nodes of the tree
+	Postcondition: util function that will copy the RHS tree to the LHS
+	-----------------------------------------------------------------------*/
 
 	void getMinimumHelper(Node * currentNode, Node & minNode) const {
 		
@@ -404,6 +543,12 @@ private:
 
 		minNode.data = currentNode->data;
 	}
+	/*-----------------------------------------------------------------------
+	getMinimumHelper
+
+	Precondition:  the current and minimum node of the tree
+	Postcondition: a helper function for getminimum, sets the minimum value in the node
+	-----------------------------------------------------------------------*/
 
 	void getMaximumHelper(Node * currentNode, Node & maxNode) const {
 
@@ -414,6 +559,12 @@ private:
 
 		maxNode.data = currentNode->data;
 	}
+	/*-----------------------------------------------------------------------
+	getMaximumHelper
+
+	Precondition:  the current and maximum node of the tree
+	Postcondition: a helper function for getMaximum, sets the maximum value in the node
+	-----------------------------------------------------------------------*/
 
 	void inorderHelper(std::ostream & out, Node * currentNode) const {
 	
@@ -424,6 +575,12 @@ private:
 		inorderHelper(out, currentNode->right);
 	
 	}
+	/*-----------------------------------------------------------------------
+	inorderHelper
+
+	Precondition:  the out stream and current node of the tree
+	Postcondition: a helper function for inorder, outputs the tree in order trasversal
+	-----------------------------------------------------------------------*/
 
 	void preorderHelper(std::ostream & out, Node * currentNode) const {
 	
@@ -434,6 +591,12 @@ private:
 		preorderHelper(out, currentNode->right);
 
 	}
+	/*-----------------------------------------------------------------------
+	preorderHelper
+
+	Precondition:  the out stream and current node of the tree
+	Postcondition: a helper function for inorder, outputs the tree pre order trasversal
+	-----------------------------------------------------------------------*/
 
 	void postorderHelper(std::ostream & out, Node * currentNode) const {
 	
@@ -444,10 +607,22 @@ private:
 		out << currentNode->data << " ";
 
 	}
+	/*-----------------------------------------------------------------------
+	postorderHelper
+
+	Precondition:  the out stream and current node of the tree
+	Postcondition: a helper function for inorder, outputs the tree in post order trasversal
+	-----------------------------------------------------------------------*/
 
 	//used by destructor
 	void deleteBinarySearchTree(Node * &subtreeRoot) {
 
 		delete _root;
 	}
+	/*-----------------------------------------------------------------------
+	deleteBinarySearchTree
+
+	Precondition:  the node of the root of the tree
+	Postcondition: a helper function for the destructor, deletes the root of the tree and will recursively call the deletion of the rest of the tree (C++ standard)
+	-----------------------------------------------------------------------*/
 };
