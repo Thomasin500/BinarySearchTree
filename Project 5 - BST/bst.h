@@ -29,16 +29,20 @@ private:
 			parent = NULL;
 		};
 
-		~Node() {}
+		~Node() {
+		
+			delete left;
+			delete right;		
+		}
 
-		int getMinFromNode() {
+		T getMinFromNode() {
 
 			if (left == NULL) return data;
 
 			else return left->getMaxFromNode();
 		}
 
-		int getMaxFromNode() {
+		T getMaxFromNode() {
 
 			if (right == NULL) return data;
 
@@ -129,7 +133,7 @@ private:
 					return this;
 				}
 			}
-		}
+		}		
 	};
 
 public:
@@ -139,19 +143,12 @@ public:
 	BinarySearchTree() {}
 
 	BinarySearchTree(BinarySearchTree & toCopy) {
+
+		cout << "Copy Constructor" << endl;
 	
-		if (toCopy._root == NULL) {
-
-			this._root == NULL;
-		}
-
-		else {
-
-			copyBST(this._root, toCopy.root);
-		}
+		copyBinarySearchTree(toCopy._root, _root);
 	}
 
-	//use helper function
 	~BinarySearchTree() {
 
 		if (_root != NULL) {
@@ -193,14 +190,6 @@ public:
 		}
 
 		return false;
-	}
-
-	T getSuccessor(const T&) const {
-	
-	}
-
-	T getPredecessor(const T&) const {
-	
 	}
 
 	T getMinimum() const {
@@ -347,7 +336,6 @@ public:
 		}	
 	}
 
-	//displays sideways, not gonna work
 	void displayGraphic(std::ostream& out, Node * node, int level) const {
 	
 		if (_root == NULL) out << "Tree is Empty\n\n";
@@ -377,26 +365,34 @@ public:
 		}	
 	}
 
-	BinarySearchTree& operator=(const BinarySearchTree& rhs) {}
+	BinarySearchTree& operator=(const BinarySearchTree& rhs) {
+	
+		cout << "\n\nAssignment Operator\n\n";
+
+		copyBinarySearchTree(rhs._root, _root);
+
+		return *this;	
+	}
 
 private: 
 
 	// Additional private functions implemented as needed
 
-	void copyBST(Node &original, Node &toCopy) {
-	
-		if (toCopy == NULL) {
-		
-			original = NULL;
+	void copyBinarySearchTree(Node * original, Node *& copy) {
+
+		if (original == NULL) {
+
+			copy = NULL;
 		}
 
 		else {
 
-			original = new Node();
-			original.data = toCopy.data;
-			copyBST(original.left, toCopy.left);
-			copyBST(original.right, toCopy.right);
-		}	
+			copy = new Node();
+			copy->data = original->data;
+			copy->parent = original->parent;
+			copyBinarySearchTree(original->left, copy->left);
+			copyBinarySearchTree(original->right, copy->right);
+		}
 	}
 
 	void getMinimumHelper(Node * currentNode, Node & minNode) const {
@@ -449,11 +445,9 @@ private:
 
 	}
 
-	//used by desctrucotr
+	//used by destructor
 	void deleteBinarySearchTree(Node * &subtreeRoot) {
-	
-		delete subtreeRoot->left;
-		delete subtreeRoot->right;
-	}
 
+		delete _root;
+	}
 };

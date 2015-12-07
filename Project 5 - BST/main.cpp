@@ -37,20 +37,30 @@ int main() {
 
 	cout << "\nDisplay post-order: \n";
 	bst.postorder(cout);
+
+	cout << "\nRemove 0";
+	bst.remove(0);
 	
-	cout << "\nSearch for 7 (true): ";
+	cout << "\n\nSearch for 7 (true): ";
 	cout << bst.search(7);
 
-	cout << "\nSearch for 9 (false): ";
-	cout << bst.search(9);
+	cout << "\nSearch for 0 (false): ";
+	cout << bst.search(0);
 
 	cout << "\n\nHeight of tree is: ";
 	cout << bst.getHeight(bst._root);
 
+	cout << "\n\nMaximum is : ";
+	bst.getMaximum();
+
+	cout << "\nMaximum is : ";
+	bst.getMinimum();
 	
-	cout << "\n\nTree 2: String\n";
+	cout << "\n\n\n\nTree 2: String\n";
 
 	BinarySearchTree<string> bst2;
+
+	cout << "\nInsert in this order: hi, goodbye, welcome, come, go, find";
 
 	bst2.insert("hi");
 	bst2.insert("goodbye");
@@ -59,7 +69,7 @@ int main() {
 	bst2.insert("go");
 	bst2.insert("find");
 
-	cout << "\nDisplay pre-order: \n";
+	cout << "\n\nDisplay pre-order: \n";
 	bst2.preorder(cout);
 
 	cout << "\nDisplay in order: \n";
@@ -77,14 +87,35 @@ int main() {
 	cout << "\n\nSize of the tree is: ";
 	cout << bst2.getSize(bst2._root);
 
+	cout << "\n\n\n\nTesting Copy Constructor and Assignment Operator";
+	cout << "\nBefore\n";
+
+	bst.inorder(cout);
+
+	BinarySearchTree<int> bst3;
 	
+	bst3 = bst;
+	bst3.insert(9999);
 
+	cout << "\nAfter" << endl;
 
+	bst.inorder(cout);
+	bst3.inorder(cout);
+	
+	cout << "\nBefore\n";	
 
+	BinarySearchTree<int> bst4 = bst;
+
+	bst4.insert(4567);
+
+	cout << "\nAfter" << endl;
+
+	bst.inorder(cout);
+	bst4.inorder(cout);
+
+	cout << "\n\nTesting done, press enter to exit";
 
 	cin.ignore();
-	cin.ignore();
-
 
 	return 1;
 }
